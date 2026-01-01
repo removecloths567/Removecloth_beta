@@ -41,7 +41,7 @@ export const SignupPage: React.FC<SignupPageProps> = ({ onBack, onClose, onGuest
             const idToken = credential.idToken;  // Get Google ID token
 
             // Send the ID token to your backend for sign-up
-            const response = await fetch(`${API_URL}/auth/google/signup`, {
+            const response = await fetch(`${API_URL}/auth/google`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
