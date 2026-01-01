@@ -1,0 +1,17 @@
+[
+    {
+        "id": "06587209-d2bd-4c1d-aa7f-3176160e634d",
+        "name": "Om Patel",
+        "email": "ompatel22@gmail.com",
+        "password": "$2b$12$5wHzi3btQR/zZ60xbVjEsuCLP.ggLP28fXE1BeAzl4LG77QCBSe3S",
+        "created_at": "2025-12-16T06:06:27.665720"
+    },
+    {
+        "user_id": "43613214-a1dc-4706-9cb4-d21065f04190",
+        "username": "machinegun",
+        "email": "omdjasoliya45@gmail.com",
+        "password": "$2b$12$m9afkzKwkvm6CzTxWto9nOzBKVZORw2gqzKFD/qji46aBFJOvFf8u",
+        "created_at": "2025-12-16T08:31:54.861506",
+        "password_reset_at": "2025-12-16T08:39:08.098409"
+    }
+]

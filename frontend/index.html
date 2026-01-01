@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>RemoveCloths - AI Image Editor</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+    <script defer src="https://cloud.umami.is/script.js" data-website-id="265ca846-16f4-4210-89f4-9bde0d10acce"></script>
+    <script>
+      tailwind.config = {
+        darkMode: 'class',
+        theme: {
+          extend: {
+            fontFamily: {
+              sans: ['Inter', 'sans-serif'],
+            },
+            colors: {
+              primary: '#ff0052',
+              secondary: '#ff00f9',
+              dark: '#000000',
+              light: '#ffffff',
+              surface: 'var(--color-surface)',
+              card: 'var(--color-card)'
+            },
+            animation: {
+              'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+              'glow': 'glow 2s ease-in-out infinite alternate',
+              'scan': 'scan 3s linear infinite',
+              'float': 'float 6s ease-in-out infinite',
+            },
+            keyframes: {
+              glow: {
+                '0%': { boxShadow: '0 0 10px #ff0052' },
+                '100%': { boxShadow: '0 0 20px #ff00f9, 0 0 10px #ff0052' },
+              },
+              scan: {
+                '0%': { top: '0%' },
+                '100%': { top: '100%' },
+              },
+              float: {
+                '0%, 100%': { transform: 'translateY(0)' },
+                '50%': { transform: 'translateY(-20px)' },
+              }
+            }
+          }
+        }
+      }
+    </script>
+    <style>
+      :root {
+        /* Enforced Dark Mode Variables */
+        --color-background: #000000;
+        --color-foreground: #ffffff;
+        --color-surface: #121212;
+        --color-card: #1e1e1e;
+      }
+      
+      body {
+        background-color: var(--color-background);
+        color: var(--color-foreground);
+      }
+
+      .gradient-text {
+        background: linear-gradient(to right, #ff0052, #ff00f9, #00ffff, #ff00f9, #ff0052);
+        background-size: 200% auto;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        animation: textGradient 3s linear infinite;
+      }
+      
+      @keyframes textGradient {
+        0% {
+          background-position: 0% center;
+        }
+        100% {
+          background-position: 200% center;
+        }
+      }
+
+      .gradient-bg {
+        background: linear-gradient(135deg, #ff0052, #ff00f9);
+      }
+      
+      .glass-panel {
+        background: rgba(30, 30, 30, 0.7);
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+      }
+    </style>
+  <script type="importmap">
+{
+  "imports": {
+    "react/": "https://esm.sh/react@^19.2.3/",
+    "react": "https://esm.sh/react@^19.2.3",
+    "lucide-react": "https://esm.sh/lucide-react@^0.561.0",
+    "react-dom/": "https://esm.sh/react-dom@^19.2.3/"
+  }
+}
+</script>
+<link rel="stylesheet" href="/index.css">
+</head>
+  <body>
+    <div id="root"></div>
+  <script type="module" src="/index.tsx"></script>
+</body>
+</html>
