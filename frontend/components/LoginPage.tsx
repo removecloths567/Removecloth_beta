@@ -47,18 +47,18 @@ export const LoginPage: React.FC<LoginPageProps> = ({ onBack, onClose, onLoginSu
     const handleGoogleLogin = async () => {
         setIsLoading(true);
         try {
-            const result = await signInWithPopup(auth, provider);  // Open Google login popup
-            const credential = GoogleAuthProvider.credentialFromResult(result);
-            const idToken = credential.idToken;
+            const result = await signInWithPopup(auth, provider);
 
-            // Send the ID token to your backend for verification
+            // ✅ CORRECT way to get ID token
+            const idToken = await result.user.getIdToken();
+
             const response = await fetch(`${API_URL}/auth/google`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify({
-                    id_token: idToken,  // Send the Google ID token
+                    id_token: idToken,
                 }),
             });
 
@@ -69,13 +69,15 @@ export const LoginPage: React.FC<LoginPageProps> = ({ onBack, onClose, onLoginSu
             }
 
             localStorage.setItem('auth_token', data.token);
-            onLoginSuccess();  // Proceed with login success
+            onLoginSuccess();
+
         } catch (err: any) {
             setError(err.message || "Google login failed");
         } finally {
             setIsLoading(false);
         }
     };
+
 
     // Handle new password input and update criteria
     const handleNewPasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
