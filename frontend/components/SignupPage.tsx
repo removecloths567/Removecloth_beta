@@ -33,21 +33,57 @@ export const SignupPage: React.FC<SignupPageProps> = ({ onBack, onClose, onGuest
         special: false
     });
 
+    // const handleGoogleSignup = async () => {
+    //     setIsLoading(true);
+    //     try {
+    //         const result = await signInWithPopup(auth, provider); // Open Google login popup
+    //         const credential = GoogleAuthProvider.credentialFromResult(result);
+    //         const idToken = credential.idToken;  // Get Google ID token
+
+    //         // Send the ID token to your backend for sign-up
+    //         const response = await fetch(`${API_URL}/auth/google`, {
+    //             method: 'POST',
+    //             headers: {
+    //                 'Content-Type': 'application/json',
+    //             },
+    //             body: JSON.stringify({
+    //                 id_token: idToken, // Send Google ID token to backend
+    //             }),
+    //         });
+
+    //         const data = await response.json();
+
+    //         if (!response.ok) {
+    //             throw new Error(data.detail || 'Google sign-up failed');
+    //         }
+
+    //         localStorage.setItem('auth_token', data.token); // Store the token
+    //         onLoginSuccess();  // Proceed with sign-up success
+
+    //     } catch (err: any) {
+    //         setError(err.message || "Google sign-up failed");
+    //     } finally {
+    //         setIsLoading(false);
+    //     }
+    // };
+
+    // Handle password change and update criteria instantly
+
     const handleGoogleSignup = async () => {
         setIsLoading(true);
         try {
-            const result = await signInWithPopup(auth, provider); // Open Google login popup
-            const credential = GoogleAuthProvider.credentialFromResult(result);
-            const idToken = credential.idToken;  // Get Google ID token
+            const result = await signInWithPopup(auth, provider);
 
-            // Send the ID token to your backend for sign-up
+            // ✅ CORRECT way to get ID token
+            const idToken = await result.user.getIdToken();
+
             const response = await fetch(`${API_URL}/auth/google`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify({
-                    id_token: idToken, // Send Google ID token to backend
+                    id_token: idToken,
                 }),
             });
 
@@ -57,8 +93,8 @@ export const SignupPage: React.FC<SignupPageProps> = ({ onBack, onClose, onGuest
                 throw new Error(data.detail || 'Google sign-up failed');
             }
 
-            localStorage.setItem('auth_token', data.token); // Store the token
-            onLoginSuccess();  // Proceed with sign-up success
+            localStorage.setItem('auth_token', data.token);
+            onLoginSuccess();
 
         } catch (err: any) {
             setError(err.message || "Google sign-up failed");
@@ -67,7 +103,7 @@ export const SignupPage: React.FC<SignupPageProps> = ({ onBack, onClose, onGuest
         }
     };
 
-    // Handle password change and update criteria instantly
+
     const handlePasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const val = e.target.value;
         setPassword(val);
